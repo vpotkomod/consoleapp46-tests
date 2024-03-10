@@ -1,36 +1,57 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp46
 {
     internal class Person
     {
-        public int MaxHP = 100;
-        public int HP = 100;
-        public int Strenght = 0;
+        private int _maxHP = 100;
+        private int _HP = 100;
+        private int _strenght = 1;
+        private int _coin = 0;
+        private string _name;
 
-        public int coin = 0;
-
-        public string NamePerson;
-
-        public Person(int HP = 100, string Name = "Враг")
+        public Person(int _HP = 100, string Name = "Враг")
         {
-            NamePerson = Name;
-            this.HP = HP;
+            _name = Name;
+            this._HP = _HP;
         }
+
+        static public void GetHp(Person Hero, int hp) => Hero._HP += hp;
+
+        static public void GetMaxHp(Person Hero, int hp) => Hero._maxHP += hp;
+
+        static public void GetCoins(Person Hero, int coins) => Hero._coin += coins;
+
+        static public void GetStrenght(Person Hero) => Hero._strenght++;
+
+
+        static public void EnemyBattling(Person Enemy, Person Hero, int Shot) => Enemy._HP -= Shot * Hero._strenght;
+
+        static public void HeroBattling(Person Hero, int Shot, int LevelWorld) => Hero._HP -= Shot + LevelWorld * 5;
+
+
+        static public int ReturnHp(Person p) => p._HP;
+
+        static public int ReturnMaxHp(Person p) => p._maxHP;
+
+        static public int ReturnCoins(Person p) => p._coin;
+
+        static public int ReturnStrenght(Person p) => p._strenght;
 
 
         static public void GetCharacter(Person Hero)
         {
-            Console.WriteLine($"Имя героя = {Hero.NamePerson}");
-            Console.WriteLine($"Здоровье = {Hero.HP}");
-            Console.WriteLine($"MAX Здоровье = {Hero.MaxHP}");
-            Console.WriteLine($"Деняк = {Hero.coin}");
-            Console.WriteLine($"Уровень мира = {Map.levelWorld}");
+            Console.WriteLine($"Имя героя = {Hero._name}");
+            if (Hero._HP > 0)
+                Console.WriteLine($"Здоровье = {Hero._HP}");
+            else
+                Console.WriteLine($"Здоровье = 0");
+            Console.WriteLine($"MAX Здоровье = {Hero._maxHP}");
+            Console.WriteLine($"Деняк = {Hero._coin}");
+            Console.WriteLine($"Сила = {Hero._strenght}");
+            Console.WriteLine($"Уровень мира = {Map.LevelWorld}");
+            Console.WriteLine($"Убитых врагов = {Map.KilledEnemys}");
+            Console.WriteLine($"До портала в новый мир = {Map.LevelWorld * 5 - Map.KilledEnemys}");
         }
-
     }
 }
