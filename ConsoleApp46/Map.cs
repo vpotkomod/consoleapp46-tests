@@ -18,8 +18,14 @@ namespace ConsoleApp46
             {
                 for (int j = 0; j < mas.GetLength(1); j++)
                 {
-                    if (mas[i, j] == '0')
+                    if (i == mas.GetLength(0)/ 2 & j == mas.GetLength(0) / 2)
                     {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write((char)2 + " ");
+                        Console.ResetColor();
+                    }
+                    else if (mas[i, j] == '0')
+                    { 
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.Write(mas[i, j] + " ");
                         Console.ResetColor();
@@ -47,13 +53,7 @@ namespace ConsoleApp46
                         Console.ForegroundColor = ConsoleColor.Gray;
                         Console.Write(mas[i, j] + " ");
                         Console.ResetColor();
-                    }
-                    else if (mas[i, j] == (char)2)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.Write(mas[i, j] + " ");
-                        Console.ResetColor();
-                    } else
+                    }else
                     {
                         Console.Write(mas[i, j] + " ");
                     }
@@ -284,35 +284,32 @@ namespace ConsoleApp46
         static void Heart(Person Hero, char[,] mas)
         {
             Console.Clear();
-            Hero.MaxHP += 10;
-            Hero.HP += Hero.MaxHP/10;
+            Hero.HP += 10;
+            if (Hero.HP - 10 == Hero.MaxHP)
+                Hero.MaxHP += 10;
+            else if (Hero.HP > Hero.MaxHP)
+                Hero.MaxHP = Hero.HP;
 
         }
         static void Portal(Person Hero, char[,] mas)
         {
             for (int i = 0; i < mas.GetLength(0); i++)
-            {
                 for (int j = 0; j < mas.GetLength(1); j++)
                 {
                     if (mas[i, j] == (char)3)
-                    {
                         Hero.coin += 100;
-                    }
                 }
-            }
             Hero.HP = Hero.MaxHP;
             Array(mas);
         }
         static void Forge(Person Hero)
         {
-
-            Console.WriteLine("Выберите действие");
             Console.WriteLine("1. Улучшить силу на 2");
             Console.WriteLine("Для выхода нажмите Enter");
             Console.WriteLine($"Оставшиеся деньги {Hero.coin}");
 
             ConsoleKey key;
-            while ((key = Console.ReadKey().Key) != ConsoleKey.Enter){
+            while ((key = Console.ReadKey().Key) != ConsoleKey.Enter)
                 switch (key)
                 {
                     case ConsoleKey.NumPad1:
@@ -324,17 +321,13 @@ namespace ConsoleApp46
                             Console.WriteLine($"Оставшиеся деньги {Hero.coin}");
                         }
                         else
-                        {
                             Console.WriteLine("Недостаточно деняк");
-                        }
                         break;
-
                 }
-            }
         }
-        static public bool GetIvent(Person Hero, char[,] mas,int A = 0, int B = 0)
+        static public bool GetIvent(Person Hero, char[,] mas, int A = 12, int B = 12)
         {
-            char key = mas[((mas.GetLength(0) - 1) / 2) + A, ((mas.GetLength(1) - 1) / 2) + B];
+            char key = mas[A, B];
 
             switch (key)
             {
