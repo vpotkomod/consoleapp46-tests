@@ -8,42 +8,61 @@ namespace ConsoleApp46
         {
             Person p = new Person(100, "Герой");
             int def = 25;
-            char[,] v = new char[def, def];
+            char[,] map = new char[def, def];
             ConsoleKeyInfo udlr = new ConsoleKeyInfo();
-            Map.Array(v);
+            ConsoleKeyInfo last = new ConsoleKeyInfo();
+            Map.Array(map);
             while (p.HP > 0)
             {
                 Console.Clear();
                 switch (udlr.Key)
                 {
-                    case ConsoleKey.UpArrow:
-                        if (Map.GetIvent(p, v, 11))
-                            Map.UpArray(v);
+                    case ConsoleKey.W: //вверх
+                        if (Map.GetIvent(p, map, 11))
+                            Map.UpArray(map);
+                        else
+                            Map.GetMap(map);
+                        last = udlr;
                         break;
-                    case ConsoleKey.DownArrow:
-                        if (Map.GetIvent(p, v, 13))
-                            Map.DownArray(v);
+                    case ConsoleKey.S: //вниз
+                        if (Map.GetIvent(p, map, 13))
+                            Map.DownArray(map);
+                        else
+                            Map.GetMap(map);
+                        last = udlr;
                         break;
-                    case ConsoleKey.LeftArrow:
-                        if (Map.GetIvent(p, v, 12, 11))
-                            Map.LeftArray(v);
+                    case ConsoleKey.A: //влево
+                        if (Map.GetIvent(p, map, 12, 11))
+                            Map.LeftArray(map);
+                        else
+                            Map.GetMap(map);
+                        last = udlr;
                         break;
-                    case ConsoleKey.RightArrow:
-                        if (Map.GetIvent(p, v, 12, 13))
-                            Map.RightArray(v);
+                    case ConsoleKey.D: //вправо
+                        if (Map.GetIvent(p, map, 12, 13))
+                            Map.RightArray(map);
+                        else
+                            Map.GetMap(map);
+                        last = udlr;
+                        break;
+                    case ConsoleKey.E: //вырубка деревьев
+                        Map.Deforestation(map, last);
+                        Map.GetMap(map);
+                        break;
+                    case ConsoleKey.Q: //переплыть водоем
+                        Map.Swimming(map, last, p);
+                        Map.GetMap(map);
                         break;
                     default:
+                        Map.GetMap(map);
                         break;
                 }
-                Map.GetMap(v);
                 Person.GetCharacter(p);
                 udlr = Console.ReadKey();
             }
             Console.Clear();
-            Console.WriteLine("Проигрыш!");
+            Console.WriteLine("Ты проиграл!");
             Console.ReadLine();
         }
     }
 }
-
-

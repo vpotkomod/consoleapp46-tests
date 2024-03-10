@@ -32,13 +32,13 @@ namespace ConsoleApp46
                     }
                     else if(mas[i, j] == (char)1)
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.Write(mas[i, j] + " ");
                         Console.ResetColor();
                     }
                     else if(mas[i, j] == (char)3)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.Magenta;
                         Console.Write(mas[i, j] + " ");
                         Console.ResetColor();
                     }
@@ -53,15 +53,26 @@ namespace ConsoleApp46
                         Console.ForegroundColor = ConsoleColor.Gray;
                         Console.Write(mas[i, j] + " ");
                         Console.ResetColor();
-                    }else
+                    }
+                    else if (mas[i, j] == 'Ф')
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.Write(mas[i, j] + " ");
+                        Console.ResetColor();
+                    }
+                    else if (mas[i, j] == 'O')
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkBlue;
+                        Console.Write(mas[i, j] + " ");
+                        Console.ResetColor();
+                    }
+                    else
                     {
                         Console.Write(mas[i, j] + " ");
                     }
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine();
-            
         }
         static public void Array(char[,] mas)
         {
@@ -73,28 +84,50 @@ namespace ConsoleApp46
                     int count = rnd.Next(100);
 
                     mas[i, j] = '.';
-                    if (count < 2)
+                    if (count < 2) //враг
                     {
                         mas[i, j] = (char)1;
                     }
-                    if(count >= 98)
+                    else if (count >= 98) //сердце
                     {
                         mas[i, j] = (char)3;
                     }
-                    if(count >= 10 && count < 20)
+                    else if (count >= 10 && count < 20) //стена
                     {
                         int X = i;
                         int Y = j;
                         for (int t = 0; t < 10; t++)
                         {
-                            mas[X++,Y++] = (char)0177;
+                            mas[X++, Y++] = (char)0177;
                             if (X > mas.GetLength(0) - 1 || Y > mas.GetLength(1) - 1)
                                 break;
                         }
                     }
-                    if (levelWorld>1)
+                    else if (count >= 20 && count < 30) //дерево
                     {
-                        mas[mas.GetLength(0)/4,mas.GetLength(1)/2] = (char)19;
+                        int X = i;
+                        int Y = j;
+                        for (int t = 0; t < 10; t++)
+                        {
+                            mas[X++, Y++] = 'Ф';
+                            if (X > mas.GetLength(0) - 1 || Y > mas.GetLength(1) - 1)
+                                break;
+                        }
+                    }
+                    else if (count >= 30 && count < 35) //водоем
+                    {
+                        bool water = false;
+                        if (i != 0 & j != 0 & i != mas.GetLength(0)-1 & j != mas.GetLength(1)-1)
+                            for (int x = -1; x <2; x++)
+                                for (int y = -1; y < 2; y++)
+                                    if (mas[i + x, j + y] == 'O')
+                                        water = true;
+                        if (!water)
+                            mas[i, j] = 'O';
+                    }
+                    if (levelWorld > 1)
+                    {
+                        mas[mas.GetLength(0) / 4, mas.GetLength(1) / 2] = (char)19;
                     }
                 }
             }
@@ -260,7 +293,6 @@ namespace ConsoleApp46
 
         static void Batle(Person Hero, char[,]mas)
         {
-            Console.Clear();
             Person Enemy = new Person(Map.levelWorld*10);
             Random rnd  = new Random();
 
@@ -275,15 +307,9 @@ namespace ConsoleApp46
             {
                 Hero.coin += rnd.Next(100);
             }
-            else
-            {
-                Console.Clear();
-                Console.WriteLine($"Поражение");
-            }
         }
         static void Heart(Person Hero, char[,] mas)
         {
-            Console.Clear();
             Hero.HP += 10;
             if (Hero.HP - 10 == Hero.MaxHP)
                 Hero.MaxHP += 10;
@@ -325,6 +351,77 @@ namespace ConsoleApp46
                         break;
                 }
         }
+        static public void Deforestation(char[,]map, ConsoleKeyInfo last)
+        {
+            int i = 0, j = 0;
+            SwitchCasing(last, ref i, ref j);
+            if (map[map.GetLength(0) / 2 + i, map.GetLength(0) / 2 + j] == 'Ф')
+                map[map.GetLength(0) / 2 + i, map.GetLength(0) / 2 + j] = '.';
+        }
+        static public void Swimming(char[,] map, ConsoleKeyInfo last, Person p)
+        {
+            int i = 0, j = 0;
+            SwitchCasing(last, ref i, ref j);
+            if (map[12 + i, 12 + j] == 'O')
+                switch (last.Key)
+                {
+                    case ConsoleKey.W:
+                        if (GetIvent(p, map, 10))
+                        {
+                            UpArray(map);
+                            UpArray(map);
+                            map[13, 12] = 'O';
+                        }
+                        break;
+                    case ConsoleKey.S:
+                        if (GetIvent(p, map, 14))
+                        {
+                            DownArray(map);
+                            DownArray(map);
+                            map[11, 12] = 'O';
+                        }
+                        break;
+                    case ConsoleKey.A:
+                        if (GetIvent(p, map, 12, 10))
+                        {
+                            LeftArray(map);
+                            LeftArray(map);
+                            map[12, 13] = 'O';
+                        }
+                        break;
+                    case ConsoleKey.D:
+                        if (GetIvent(p, map, 12, 14))
+                        {
+                            RightArray(map);
+                            RightArray(map);
+                            map[12, 11] = 'O';
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            Console.Clear();
+        }
+        static void SwitchCasing(ConsoleKeyInfo last, ref int i, ref int j)
+        {
+            switch (last.Key)
+            {
+                case ConsoleKey.W:
+                    i--;
+                    break;
+                case ConsoleKey.S:
+                    i++;
+                    break;
+                case ConsoleKey.A:
+                    j--;
+                    break;
+                case ConsoleKey.D:
+                    j++;
+                    break;
+                default:
+                    break;
+            }
+        }
         static public bool GetIvent(Person Hero, char[,] mas, int A = 12, int B = 12)
         {
             char key = mas[A, B];
@@ -345,6 +442,10 @@ namespace ConsoleApp46
                     Forge(Hero);
                     break;
                 case (char)0177:
+                    return false;
+                case 'Ф':
+                    return false;
+                case 'O':
                     return false;
                 default:
                     break;
