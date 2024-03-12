@@ -12,7 +12,7 @@ namespace ConsoleApp46
             char[,] map = new char[def, def];
             ConsoleKeyInfo udlr = new ConsoleKeyInfo();
             ConsoleKeyInfo last = new ConsoleKeyInfo();
-            Map.Array(map);
+            Map.Generating(map);
             while (Person.ReturnHp(p) > 0)
             {
                 Console.Clear();
@@ -53,6 +53,7 @@ namespace ConsoleApp46
                     default:
                         break;
                 }
+                Map.MoveEnemy(ref map, p);
                 Map.Win(map);
                 Map.GetMap(map);
                 Person.GetCharacter(p);

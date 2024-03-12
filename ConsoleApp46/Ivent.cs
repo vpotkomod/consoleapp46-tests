@@ -55,7 +55,7 @@ namespace ConsoleApp46
             else
                 while (Person.ReturnHp(Hero) != Person.ReturnMaxHp(Hero))
                     Person.GetHp(Hero, 1);
-            Map.Array(mas);
+            Map.Generating(mas);
         }
     }
 

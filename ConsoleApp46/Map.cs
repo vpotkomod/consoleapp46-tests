@@ -1,5 +1,6 @@
 ﻿using System;
 
+
 namespace ConsoleApp46
 {
     internal class Map
@@ -15,6 +16,7 @@ namespace ConsoleApp46
             {
                 for (int j = 0; j < map.GetLength(1); j++)
                 {
+
                     if (i == map.GetLength(0) / 2 & j == map.GetLength(0) / 2)
                     {
                         Console.ForegroundColor = ConsoleColor.Cyan;
@@ -44,7 +46,53 @@ namespace ConsoleApp46
             }
         }
 
-        static public void Array(char[,] map)
+        static public void MoveEnemy(ref char[,] _map, Person p)
+        {
+            char[,] newMap = new char[_map.GetLength(0), _map.GetLength(1)];
+            Array.Copy(_map, newMap, _map.Length);
+
+            for (int i = 0; i < _map.GetLength(0); i++)
+                for (int j = 0; j < _map.GetLength(1); j++)
+                    if (_map[i, j] == (char)1)
+                    {
+                        int direction = rnd.Next(4);
+
+                        int newX = i, newY = j;
+                        switch (direction)
+                        {
+                            case 0:
+                                if (newX < _map.GetLength(0) - 1)
+                                    newX += 1;
+                                break;
+                            case 1:
+                                if (newX > 0)
+                                    newX -= 1;
+                                break;
+                            case 2:
+                                if (newY < _map.GetLength(1) - 1)
+                                    newY += 1;
+                                break;
+                            case 3:
+                                if (newY > 0)
+                                    newY -= 1;
+                                break;
+                        }
+
+                        if (newMap[newX, newY] == '.' || (newX == 12 & newY == 12))
+                        {
+                            if (newX == 12 & newY == 12)
+                                GetIvent(p, newMap, i, j);
+                            else
+                                newMap[newX, newY] = (char)1;
+                            newMap[i, j] = '.';
+                        }
+                    }
+
+
+            Array.Copy(newMap, _map, _map.Length);
+        }
+
+        static public void Generating(char[,] map)
         {
             for (int i = 0; i < map.GetLength(0); i++)
                 for (int j = 0; j < map.GetLength(1); j++)
