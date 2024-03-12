@@ -47,6 +47,7 @@
     <Compile Include="Ivent.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Movement.cs" />
+    <Compile Include="MyException.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

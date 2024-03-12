@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleApp129;
+using System;
 
 namespace ConsoleApp46
 {
@@ -62,25 +63,43 @@ namespace ConsoleApp46
     {
         public Forge(Person Hero) : base(Hero)
         {
-            Console.WriteLine("1. Улучшить силу за 250");
+            Console.WriteLine("1. Улучшить силу за 250\n2. Продать дерево за 5");
             Console.WriteLine("Для выхода нажмите Enter");
-            Console.WriteLine($"Оставшиеся деньги {Person.ReturnCoins(Hero)}");
+            Console.WriteLine($" деньги {Person.ReturnCoins(Hero)}\n дерево {Person.ReturnTrees(Hero)}");
 
             ConsoleKey key;
             while ((key = Console.ReadKey().Key) != ConsoleKey.Enter)
-                switch (key)
+                try
                 {
-                    case ConsoleKey.D1:
-                        if (Person.ReturnCoins(Hero) >= 250)
-                        {
-                            Person.GetStrenght(Hero);
-                            Person.GetCoins(Hero, -250);
-                            Console.WriteLine($"\nСила увеличена, Текущая сила = {Person.ReturnStrenght(Hero)}");
-                            Console.WriteLine($"Оставшиеся деньги {Person.ReturnCoins(Hero)}");
-                        }
-                        else
-                            Console.WriteLine("\nНедостаточно деняк");
-                        break;
+                    switch (key)
+                    {
+                        case ConsoleKey.D1:
+                            if (Person.ReturnCoins(Hero) >= 250)
+                            {
+                                Person.GetStrenght(Hero);
+                                Person.GetCoins(Hero, -250);
+                                Console.WriteLine($"\nСила увеличена, Текущая сила = {Person.ReturnStrenght(Hero)}");
+                                Console.WriteLine($" деньги {Person.ReturnCoins(Hero)}\n дерево {Person.ReturnTrees(Hero)}");
+                            }
+                            else
+                                throw new MyException("\nНедостаточно деняк");
+                            break;
+                        case ConsoleKey.D2:
+                            if (Person.ReturnTrees(Hero) > 0)
+                            {
+                                Person.GetCoins(Hero, 5);
+                                Person.GetTrees(Hero, -1);
+                                Console.WriteLine($"\n1 дерево продано");
+                                Console.WriteLine($" деньги {Person.ReturnCoins(Hero)}\n дерево {Person.ReturnTrees(Hero)}");
+                            }
+                            else
+                                throw new MyException("\nНедостаточно дерева");
+                            break;
+                    }
+                }
+                catch (Exception e) 
+                {
+                    Console.WriteLine(e.Message);
                 }
         }
     }

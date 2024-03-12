@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleApp129;
+using System;
 
 namespace ConsoleApp46
 {
@@ -30,10 +31,24 @@ namespace ConsoleApp46
                         CheckMoving(p, ref map, 12, 13, udlr, ref last);
                         break;
                     case ConsoleKey.E: //вырубка деревьев
-                        new Deforestation(map, last, p);
+                        try
+                        {
+                            new Deforestation(map, last, p);
+                        }
+                        catch (MyException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                         break;
                     case ConsoleKey.Q: //переплыть водоем
-                        new Swimming(map, last, p);
+                        try
+                        { 
+                            new Swimming(map, last, p);
+                        }
+                        catch (MyException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                         break;
                     default:
                         break;

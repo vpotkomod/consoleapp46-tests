@@ -9,6 +9,7 @@ namespace ConsoleApp46
         private int _strenght = 1;
         private int _coin = 0;
         private string _name;
+        private int _trees = 0;
 
         public Person(int _HP = 100, string Name = "Враг")
         {
@@ -24,6 +25,8 @@ namespace ConsoleApp46
 
         static public void GetStrenght(Person Hero) => Hero._strenght++;
 
+        static public void GetTrees(Person Hero, int count) => Hero._trees += count;
+
 
         static public void EnemyBattling(Person Enemy, Person Hero, int Shot) => Enemy._HP -= Shot * Hero._strenght;
 
@@ -38,6 +41,8 @@ namespace ConsoleApp46
 
         static public int ReturnStrenght(Person p) => p._strenght;
 
+        static public int ReturnTrees(Person p) => p._trees;
+
 
         static public void GetCharacter(Person Hero)
         {
@@ -51,6 +56,7 @@ namespace ConsoleApp46
             Console.WriteLine($"Сила = {Hero._strenght}");
             Console.WriteLine($"Уровень мира = {Map.LevelWorld}");
             Console.WriteLine($"Убитых врагов = {Map.KilledEnemys}");
+            Console.WriteLine($"Дерево = {Hero._trees}");
             Console.WriteLine($"До портала в новый мир = {Map.LevelWorld * 5 - Map.KilledEnemys}");
         }
     }

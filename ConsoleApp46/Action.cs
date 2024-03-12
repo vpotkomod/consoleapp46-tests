@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleApp129;
+using System;
 
 namespace ConsoleApp46
 {
@@ -37,9 +38,10 @@ namespace ConsoleApp46
             if (map[map.GetLength(0) / 2 + i, map.GetLength(0) / 2 + j] == 'Ф')
             {
                 map[map.GetLength(0) / 2 + i, map.GetLength(0) / 2 + j] = '.';
-                Random rnd = new Random();
-                Person.GetCoins(Hero, rnd.Next(1, 6));
+                Person.GetTrees(Hero, 1);
             }
+            else
+                throw new MyException("Это не дерево!");
         }
     }
 
@@ -91,6 +93,8 @@ namespace ConsoleApp46
                     default:
                         break;
                 }
+            else
+                throw new MyException("Это не переплыть!");
             Console.Clear();
         }
     }
