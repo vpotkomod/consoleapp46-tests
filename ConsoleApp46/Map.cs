@@ -46,7 +46,7 @@ namespace ConsoleApp46
             }
         }
 
-        static public void MoveEnemy(ref char[,] _map, Person p)
+        static public void MoveEnemy(ref char[,] _map, Person p, ConsoleKeyInfo last)
         {
             char[,] newMap = new char[_map.GetLength(0), _map.GetLength(1)];
             Array.Copy(_map, newMap, _map.Length);
@@ -162,13 +162,17 @@ namespace ConsoleApp46
             {
                 case (char)1:
                     new Battle(Hero);
-                    break;
+                    if (Person.ReturnMaxEndurance(Hero) > Person.ReturnEndurance(Hero))
+                        Person.GetEndurance(Hero);
+                    return true;
                 case (char)3:
                     new Heart(Hero);
-                    break;
+                    if (Person.ReturnMaxEndurance(Hero) > Person.ReturnEndurance(Hero))
+                        Person.GetEndurance(Hero);
+                    return true;
                 case '0':
                     new Portal(Hero, map);
-                    break;
+                    return true;
                 case (char)19:
                     new Forge(Hero);
                     return false;
@@ -178,10 +182,11 @@ namespace ConsoleApp46
                     return false;
                 case 'O':
                     return false;
+                case '.':
+                    return true;
                 default:
-                    break;
+                    return false;
             }
-            return true;
         }
     }
 }

@@ -44,6 +44,7 @@ namespace ConsoleApp46
                         try
                         { 
                             new Swimming(map, last, p);
+                            Person.SpendEndurance(p);
                         }
                         catch (MyException e)
                         {
@@ -53,7 +54,7 @@ namespace ConsoleApp46
                     default:
                         break;
                 }
-                Map.MoveEnemy(ref map, p);
+                Map.MoveEnemy(ref map, p, last);
                 Map.Win(map);
                 Map.GetMap(map);
                 Person.GetCharacter(p);
