@@ -3,8 +3,14 @@ using System;
 
 namespace ConsoleApp46
 {
+    /// <summary>
+    ///  входная точка программы
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        ///  начинает и инициализирует игровой процесс
+        /// </summary>
         static void Main(string[] args)
         {
             Person p = new Person(100, "Герой");
@@ -65,6 +71,15 @@ namespace ConsoleApp46
             Console.ReadLine();
         }
 
+        /// <summary>
+        ///  проверяет возможность передвижения
+        /// </summary>
+        /// <param name="Hero">персонаж</param>
+        /// <param name="map">карта</param>
+        /// <param name="A">строка</param>
+        /// <param name="B">столбец</param>
+        /// <param name="udlr">стрелочка</param>
+        /// <param name="last">последняя нажатая кнопка</param>
         static void CheckMoving(Person Hero, ref char[,] map, int A, int B, ConsoleKeyInfo udlr, ref ConsoleKeyInfo last)
         {
             if (Map.GetIvent(Hero, map, A, B))

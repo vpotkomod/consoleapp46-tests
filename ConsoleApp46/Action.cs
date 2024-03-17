@@ -3,10 +3,23 @@ using System;
 
 namespace ConsoleApp46
 {
+    /// <summary>
+    ///  действие на карте
+    /// </summary>
     abstract class Action
     {
+        /// <summary>
+        ///  действие на карте
+        /// </summary>
+        /// <param name="map">персонаж</param>
+        /// <param name="last">последняя нажатая кнопка</param>
         public Action(char[,] map, ConsoleKeyInfo last) { }
-
+        /// <summary>
+        ///  проверка на нажатую кнопку
+        /// </summary>
+        /// <param name="last">последняя нажатая кнопка</param>
+        /// <param name="i">строка</param>
+        /// <param name="j">столбец</param>
         static public void SwitchCasing(ConsoleKeyInfo last, ref int i, ref int j)
         {
             switch (last.Key)
@@ -28,9 +41,17 @@ namespace ConsoleApp46
             }
         }
     }
-
+    /// <summary>
+    ///  вырубка деревьев
+    /// </summary>
     internal class Deforestation : Action
     {
+        /// <summary>
+        ///  вырубка деревьев
+        /// </summary>
+        /// <param name="map">персонаж</param>
+        /// <param name="last">последняя нажатая кнопка</param>
+        /// <param name="Hero">персонаж</param>
         public Deforestation(char[,] map, ConsoleKeyInfo last, Person Hero) : base(map, last)
         {
             int i = 0, j = 0;
@@ -44,9 +65,17 @@ namespace ConsoleApp46
                 throw new MyException("Это не дерево!");
         }
     }
-
+    /// <summary>
+    ///  переплытие водоема
+    /// </summary>
     internal class Swimming : Action
     {
+        /// <summary>
+        ///  переплытие водоема
+        /// </summary>
+        /// <param name="map">персонаж</param>
+        /// <param name="last">последняя нажатая кнопка</param>
+        /// <param name="p">персонаж</param>
         public Swimming(char[,] map, ConsoleKeyInfo last, Person p) : base(map, last)
         {
             if (Person.ReturnEndurance(p) > 0)

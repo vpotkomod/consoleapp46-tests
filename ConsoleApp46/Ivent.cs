@@ -3,13 +3,26 @@ using System;
 
 namespace ConsoleApp46
 {
+    /// <summary>
+    ///  взаимодействие с картой
+    /// </summary>
     abstract class Ivent
     {
+        /// <summary>
+        ///  взаимодействие с картой
+        /// </summary>
+        /// <param name="Hero">персонаж</param>
         public Ivent(Person Hero) { }
     }
-
+    /// <summary>
+    ///  битва
+    /// </summary>
     internal class Battle : Ivent
     {
+        /// <summary>
+        ///  битва с врагом
+        /// </summary>
+        /// <param name="Hero">персонаж</param>
         public Battle(Person Hero) : base(Hero)
         {
             Person Enemy = new Person(Map.LevelWorld * 10);
@@ -27,9 +40,15 @@ namespace ConsoleApp46
             Map.KilledEnemys++;
         }
     }
-
+    /// <summary>
+    ///  сердце
+    /// </summary>
     internal class Heart : Ivent
     {
+        /// <summary>
+        ///  взятие сердец
+        /// </summary>
+        /// <param name="Hero">персонаж</param>
         public Heart(Person Hero) : base(Hero)
         {
             Person.GetHp(Hero, 10 * Map.LevelWorld + 2 * Person.ReturnCharisma(Hero));
@@ -40,9 +59,16 @@ namespace ConsoleApp46
                     Person.GetMaxHp(Hero, 1);
         }
     }
-
+    /// <summary>
+    ///  портал
+    /// </summary>
     internal class Portal : Ivent
     {
+        /// <summary>
+        ///  спавн портала
+        /// </summary>
+        /// <param name="Hero">персонаж</param>
+        /// <param name="mas">карта</param>
         public Portal(Person Hero, char[,] mas) : base(Hero)
         {
             Map.LevelWorld++;
@@ -58,9 +84,15 @@ namespace ConsoleApp46
             Map.Generating(mas);
         }
     }
-
+    /// <summary>
+    ///  кузница
+    /// </summary>
     internal class Forge : Ivent
     {
+        /// <summary>
+        ///  взаимодействие с кузницей
+        /// </summary>
+        /// <param name="Hero">персонаж</param>
         public Forge(Person Hero) : base(Hero)
         {
             int price = 250 / (1 * Person.ReturnCharisma(Hero));

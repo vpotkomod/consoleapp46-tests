@@ -4,6 +4,11 @@ namespace ConsoleApp46
 {
     internal class Movement
     {
+        /// <summary>
+        ///  проверяет возможность передвижения персонажа
+        /// </summary>
+        /// <param name="map">карта</param>
+        /// <param name="key">стрелочка</param>
         public Movement(ref char[,] map, ConsoleKeyInfo key)
         {
             char[] temp;
@@ -36,6 +41,21 @@ namespace ConsoleApp46
             }
         }
 
+        /// <summary>
+        ///  передвигает персонажа
+        /// </summary>
+        /// <param name="ij">параметр для вычисления</param>
+        /// <param name="ji">параметр для вычисления</param>
+        /// <param name="i">параметр для вычисления</param>
+        /// <param name="j">параметр для вычисления</param>
+        /// <param name="map">карта</param>
+        /// <param name="temp">временная карта</param>
+        /// <param name="x1">параметр для вычисления</param>
+        /// <param name="x2">параметр для вычисления</param>
+        /// <param name="x3">параметр для вычисления</param>
+        /// <param name="x4">параметр для вычисления</param>
+        /// <param name="x">параметр для вычисления</param>
+        /// <param name="5">параметр для вычисления</param>        
         private void Calculate(int ij, int ji, int i, int j, ref char[,] map, ref char[] temp, int x1, int x2, int x3, int x4, int x, int y)
         {
             if (ij == x1)

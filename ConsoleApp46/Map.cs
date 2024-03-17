@@ -1,15 +1,33 @@
 ﻿using System;
 
-
 namespace ConsoleApp46
 {
+    /// <summary>
+    ///  игровая карта
+    /// </summary>
     internal class Map
     {
+        /// <summary>
+        ///  уровень мира
+        /// </summary>
         static public int LevelWorld = 1;
+        /// <summary>
+        ///  наличие портала
+        /// </summary>
         static public bool NewWorld = false;
+        /// <summary>
+        ///  убитые враги
+        /// </summary>
         static public int KilledEnemys = 0;
+        /// <summary>
+        ///  рандом
+        /// </summary>
         static Random rnd = new Random();
 
+        /// <summary>
+        ///  отрисовка карты
+        /// </summary>
+        /// <param name="map">карта</param>
         static public void GetMap(char[,] map)
         {
             for (int i = 0; i < map.GetLength(0); i++)
@@ -45,7 +63,12 @@ namespace ConsoleApp46
                 Console.WriteLine();
             }
         }
-
+        /// <summary>
+        ///  передвижение врагов
+        /// </summary>
+        /// <param name="_map">карта</param>
+        /// <param name="p">персонаж</param>
+        /// <param name="last">последняя нажатая стрелочка</param>
         static public void MoveEnemy(ref char[,] _map, Person p, ConsoleKeyInfo last)
         {
             char[,] newMap = new char[_map.GetLength(0), _map.GetLength(1)];
@@ -91,7 +114,10 @@ namespace ConsoleApp46
 
             Array.Copy(newMap, _map, _map.Length);
         }
-
+        /// <summary>
+        ///  генерация карты
+        /// </summary>
+        /// <param name="map">карта</param>
         static public void Generating(char[,] map)
         {
             for (int i = 0; i < map.GetLength(0); i++)
@@ -141,7 +167,10 @@ namespace ConsoleApp46
                         map[map.GetLength(0) / 4, map.GetLength(1) / 2] = (char)19;
                 }
         }
-       
+        /// <summary>
+        ///  проверка на генерацию портала
+        /// </summary>
+        /// <param name="map">карта</param>
         static public bool Win(char[,] map)
         {
             if (KilledEnemys == 5 * LevelWorld & !NewWorld)
@@ -153,7 +182,13 @@ namespace ConsoleApp46
             else 
                 return false; 
         }
-
+        /// <summary>
+        ///  проверка на взаимодействие с игровой картой
+        /// </summary>
+        /// <param name="Hero">персонаж</param>
+        /// <param name="map">карта</param>
+        /// <param name="A">строка</param>
+        /// <param name="B">столбец</param>
         static public bool GetIvent(Person Hero, char[,] map, int A, int B)
         {
             char key = map[A, B];
