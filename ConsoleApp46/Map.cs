@@ -38,13 +38,13 @@ namespace ConsoleApp46
                     if (i == map.GetLength(0) / 2 & j == map.GetLength(0) / 2)
                     {
                         Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.Write((char)2 + " ");
+                        Console.Write('P' + " ");
                     }
                     else
                     {
                         if (map[i, j] == '0')
                             Console.ForegroundColor = ConsoleColor.Yellow;
-                        else if (map[i, j] == (char)1)
+                        else if (map[i, j] == 'o')
                             Console.ForegroundColor = ConsoleColor.Red;
                         else if (map[i, j] == (char)3)
                             Console.ForegroundColor = ConsoleColor.Magenta;
@@ -76,7 +76,7 @@ namespace ConsoleApp46
 
             for (int i = 0; i < _map.GetLength(0); i++)
                 for (int j = 0; j < _map.GetLength(1); j++)
-                    if (_map[i, j] == (char)1)
+                    if (_map[i, j] == 'o')
                     {
                         int direction = rnd.Next(4);
 
@@ -106,7 +106,7 @@ namespace ConsoleApp46
                             if (newX == 12 & newY == 12)
                                 GetIvent(p, newMap, i, j);
                             else
-                                newMap[newX, newY] = (char)1;
+                                newMap[newX, newY] = 'o';
                             newMap[i, j] = '.';
                         }
                     }
@@ -127,7 +127,7 @@ namespace ConsoleApp46
 
                     map[i, j] = '.';
                     if (count < 2) //враг
-                        map[i, j] = (char)1;
+                        map[i, j] = 'o';
                     else if (count >= 98) //сердце
                         map[i, j] = (char)3;
                     else if (count >= 10 && count < 20) //стена
@@ -195,7 +195,7 @@ namespace ConsoleApp46
 
             switch (key)
             {
-                case (char)1:
+                case 'o':
                     new Battle(Hero);
                     if (Person.ReturnMaxEndurance(Hero) > Person.ReturnEndurance(Hero))
                         Person.GetEndurance(Hero);

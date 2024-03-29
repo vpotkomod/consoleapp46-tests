@@ -19,6 +19,7 @@ namespace ConsoleApp46
             ConsoleKeyInfo udlr = new ConsoleKeyInfo();
             ConsoleKeyInfo last = new ConsoleKeyInfo();
             bool getCharacter = false;
+            bool getCharacteristic = false;
             Map.Generating(map);
             while (Person.ReturnHp(p) > 0)
             {
@@ -49,7 +50,7 @@ namespace ConsoleApp46
                         break;
                     case ConsoleKey.Q: //переплыть водоем
                         try
-                        { 
+                        {
                             new Swimming(map, last, p);
                             Person.SpendEndurance(p);
                         }
@@ -59,15 +60,22 @@ namespace ConsoleApp46
                         }
                         break;
                     case ConsoleKey.R:
-                        getCharacter = !getCharacter;
+                        if (!getCharacteristic)
+                            getCharacter = !getCharacter;
+                        break;
+                    case ConsoleKey.T:
+                        if (!getCharacter)
+                            getCharacteristic = !getCharacteristic;
                         break;
                     default:
                         break;
                 }
                 Map.MoveEnemy(ref map, p, last);
                 Map.Win(map);
-                if (getCharacter)
+                if (getCharacter & !getCharacteristic)
                     new GetCharacter(map, last, p);
+                if (getCharacteristic & !getCharacter)
+                    new GetCharacteristic(map, last, p);
                 Map.GetMap(map);
                 Person.GetCharacter(p);
                 udlr = Console.ReadKey();

@@ -132,9 +132,17 @@ namespace ConsoleApp46
                 throw new MyException("Не хватает выносливости!");
         }
     }
-
+    /// <summary>
+    ///  отображение характеристик героя
+    /// </summary>
     internal class GetCharacter : Action
     {
+        /// <summary>
+        ///  отображение характеристик героя
+        /// </summary>
+        /// <param name="map">персонаж</param>
+        /// <param name="last">последняя нажатая кнопка</param>
+        /// <param name="p">персонаж</param>
         public GetCharacter(char[,] map, ConsoleKeyInfo last, Person p) : base(map, last)
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -147,6 +155,69 @@ namespace ConsoleApp46
             Console.WriteLine($"Интеллект = {Person.ReturnIntelligence(p)}");
             Console.WriteLine($"Ловкость = {Person.ReturnAgility(p)}");
             Console.WriteLine($"Удача = {Person.ReturnLuck(p)}");
+        }
+    }
+    /// <summary>
+    ///  отображение информации о предметах
+    /// </summary>
+    internal class GetCharacteristic : Action
+    {
+        /// <summary>
+        ///  отображение информации о предметах
+        /// </summary>
+        /// <param name="map">персонаж</param>
+        /// <param name="last">последняя нажатая кнопка</param>
+        /// <param name="p">персонаж</param>
+        public GetCharacteristic(char[,] map, ConsoleKeyInfo last, Person p) : base(map, last)
+        {
+            int i = 12, j = 12;
+            SwitchCasing(last, ref i, ref j);
+            char key = map[i, j];
+
+            switch (key)
+            {
+                case 'o':
+                    Console.ForegroundColor= ConsoleColor.Red;
+                    Console.WriteLine("это враг");
+                    Console.ResetColor();
+                    break;
+                case (char)3:
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine("это сердце");
+                    Console.ResetColor();
+                    break;
+                case '0':
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("это портал");
+                    Console.ResetColor();
+                    break;
+                case (char)19:
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("это кузница");
+                    Console.ResetColor();
+                    break;
+                case (char)0177:
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine("это стена");
+                    Console.ResetColor();
+                    break;
+                case 'Ф':
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("это дерево");
+                    Console.ResetColor();
+                    break;
+                case 'O':
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("это водоем");
+                    Console.ResetColor();
+                    break;
+                case '.':
+                    Console.WriteLine("это поле");
+                    break;
+                default:
+                    break;
+            }
+
         }
     }
 }
