@@ -132,4 +132,21 @@ namespace ConsoleApp46
                 throw new MyException("Не хватает выносливости!");
         }
     }
+
+    internal class GetCharacter : Action
+    {
+        public GetCharacter(char[,] map, ConsoleKeyInfo last, Person p) : base(map, last)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Характеристики:");
+            Console.ResetColor();
+            Console.WriteLine($"Сила = {Person.ReturnStrenght(p)}");
+            Console.WriteLine($"Восприятие = {Person.ReturnPerception(p)}");
+            Console.WriteLine($"Выносливость = {Person.ReturnEndurance(p)}");
+            Console.WriteLine($"Харизма = {Person.ReturnCharisma(p)}");
+            Console.WriteLine($"Интеллект = {Person.ReturnIntelligence(p)}");
+            Console.WriteLine($"Ловкость = {Person.ReturnAgility(p)}");
+            Console.WriteLine($"Удача = {Person.ReturnLuck(p)}");
+        }
+    }
 }

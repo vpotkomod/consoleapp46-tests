@@ -234,13 +234,6 @@ namespace ConsoleApp46
                 Console.WriteLine($"Здоровье = 0");
             Console.WriteLine($"MAX Здоровье = {Hero._maxHP}");
             Console.WriteLine($"Деняк = {Hero._coin}");
-            Console.WriteLine($"Сила = {Hero._strenght}");
-            Console.WriteLine($"Восприятие = {Hero._perception}");
-            Console.WriteLine($"Выносливость = {Hero._endurance}");
-            Console.WriteLine($"Харизма = {Hero._charisma}");
-            Console.WriteLine($"Интеллект = {Hero._intelligence}");
-            Console.WriteLine($"Ловкость = {Hero._agility}");
-            Console.WriteLine($"Удача = {Hero._luck}");
             Console.WriteLine($"Уровень мира = {Map.LevelWorld}");
             Console.WriteLine($"Убитых врагов = {Map.KilledEnemys}");
             Console.WriteLine($"Дерево = {Hero._trees}");
