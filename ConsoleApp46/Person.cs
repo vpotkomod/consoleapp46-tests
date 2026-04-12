@@ -22,7 +22,7 @@ namespace ConsoleApp46
         /// <summary>
         ///  имя
         /// </summary>
-        private string _name;
+        private readonly string _name;
         /// <summary>
         ///  количество вырубленных деревьев
         /// </summary>
