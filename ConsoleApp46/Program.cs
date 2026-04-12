@@ -73,9 +73,9 @@ namespace ConsoleApp46
                 Map.MoveEnemy(ref map, p, last);
                 Map.Win(map);
                 if (getCharacter & !getCharacteristic)
-                    new GetCharacter(map, last, p);
+                    new GetCharacter(p);
                 if (getCharacteristic & !getCharacter)
-                    new GetCharacteristic(map, last, p);
+                    new GetCharacteristic(map, last);
                 Map.GetMap(map);
                 Person.GetCharacter(p);
                 udlr = Console.ReadKey();

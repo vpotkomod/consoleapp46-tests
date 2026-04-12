@@ -13,7 +13,7 @@ namespace ConsoleApp46
         /// </summary>
         /// <param name="map">персонаж</param>
         /// <param name="last">последняя нажатая кнопка</param>
-        public Action(char[,] map, ConsoleKeyInfo last) { }
+        public Action() { }
         /// <summary>
         ///  проверка на нажатую кнопку
         /// </summary>
@@ -52,7 +52,7 @@ namespace ConsoleApp46
         /// <param name="map">персонаж</param>
         /// <param name="last">последняя нажатая кнопка</param>
         /// <param name="Hero">персонаж</param>
-        public Deforestation(char[,] map, ConsoleKeyInfo last, Person Hero) : base(map, last)
+        public Deforestation(char[,] map, ConsoleKeyInfo last, Person Hero)
         {
             int i = 0, j = 0;
             SwitchCasing(last, ref i, ref j);
@@ -76,7 +76,7 @@ namespace ConsoleApp46
         /// <param name="map">персонаж</param>
         /// <param name="last">последняя нажатая кнопка</param>
         /// <param name="p">персонаж</param>
-        public Swimming(char[,] map, ConsoleKeyInfo last, Person p) : base(map, last)
+        public Swimming(char[,] map, ConsoleKeyInfo last, Person p)
         {
             if (Person.ReturnEndurance(p) > 0)
             {
@@ -143,7 +143,7 @@ namespace ConsoleApp46
         /// <param name="map">персонаж</param>
         /// <param name="last">последняя нажатая кнопка</param>
         /// <param name="p">персонаж</param>
-        public GetCharacter(char[,] map, ConsoleKeyInfo last, Person p) : base(map, last)
+        public GetCharacter(Person p)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Характеристики:");
@@ -168,7 +168,7 @@ namespace ConsoleApp46
         /// <param name="map">персонаж</param>
         /// <param name="last">последняя нажатая кнопка</param>
         /// <param name="p">персонаж</param>
-        public GetCharacteristic(char[,] map, ConsoleKeyInfo last, Person p) : base(map, last)
+        public GetCharacteristic(char[,] map, ConsoleKeyInfo last)
         {
             int i = 12, j = 12;
             SwitchCasing(last, ref i, ref j);
