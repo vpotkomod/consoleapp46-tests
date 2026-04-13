@@ -5,7 +5,7 @@ namespace ConsoleApp46
     /// <summary>
     ///  объект карты "персонаж"
     /// </summary>
-    internal class Person
+    public class Person
     {
         /// <summary>
         ///  макс здоровье
