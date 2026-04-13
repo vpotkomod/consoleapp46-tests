@@ -11,6 +11,7 @@ namespace ConsoleApp46.Tests1
     [TestClass]
     public class ActionTests
     {
+        // Проверяет, что при нажатии W координаты изменяются.
         [TestMethod]
         public void SwitchCasing_WhenWPressed_ChangesCoordinates()
         {
@@ -26,6 +27,7 @@ namespace ConsoleApp46.Tests1
             Assert.AreNotEqual(0, i + j);
         }
 
+        // Проверяет, что при нажатии A координаты изменяются.
         [TestMethod]
         public void SwitchCasing_WhenAPressed_ChangesCoordinates()
         {
@@ -41,6 +43,7 @@ namespace ConsoleApp46.Tests1
             Assert.AreNotEqual(0, i + j);
         }
 
+        // Проверяет, что при нажатии S координаты изменяются.
         [TestMethod]
         public void SwitchCasing_WhenSPressed_ChangesCoordinates()
         {
@@ -56,6 +59,7 @@ namespace ConsoleApp46.Tests1
             Assert.AreNotEqual(0, i + j);
         }
 
+        // Проверяет, что при нажатии D координаты изменяются.
         [TestMethod]
         public void SwitchCasing_WhenDPressed_ChangesCoordinates()
         {
