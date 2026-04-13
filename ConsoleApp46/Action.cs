@@ -6,7 +6,7 @@ namespace ConsoleApp46
     /// <summary>
     ///  действие на карте
     /// </summary>
-    abstract class Action
+    public abstract class Action
     {
         /// <summary>
         ///  действие на карте
