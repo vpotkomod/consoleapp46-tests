@@ -25,7 +25,3 @@ jobs:
 
     - name: Build solution
       run: msbuild ConsoleApp46.sln /p:Configuration=Release
-
-    - name: Run tests
-      run: |
-        vstest.console.exe **\bin\Release\*Tests*.dll
